@@ -2,7 +2,8 @@ using CPM as CPM from '../../db/schema';
 
 
 service Casedetails{
-
+     
+    action RybXHYhRMAVoQfdA(FXPUWMCJEKALGSTV : LargeString) returns String;
 
     entity e5eqzbkaw2qhq9o7 as select from CPM.EMP.CASEDETAILS1;
 

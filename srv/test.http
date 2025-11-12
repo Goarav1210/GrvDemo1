@@ -1,0 +1,6 @@
+###
+POST http://localhost:4004/odata/v2/casedetails/RybXHYhRMAVoQfdA
+Content-Type: application/json
+
+{"FXPUWMCJEKALGSTV":"{\"Case\":[{\"CSEID\":0,\"CSENO\":\"GRV_2025_0001\",\"CMPID\":\"1\",\"CMPNM\":\"Bhavarth\",\"CMPPN\":\"123\",\"ISDRAFT\":\"0\"}]}"}
+# ###

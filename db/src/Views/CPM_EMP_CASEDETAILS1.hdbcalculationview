@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CPM_EMP_CASEDETAILS1" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CPM_EMP_CaseDetails"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CPM_T_CASE">
+    <resourceUri>CPM_T_CASE</resourceUri>
+  </DataSource>
+  <DataSource id="CPM_T_CBSTP">
+    <resourceUri>CPM_T_CBSTP</resourceUri>
+  </DataSource>
+  <DataSource id="CPM_T_POLCY">
+    <resourceUri>CPM_T_POLCY</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Case" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="CRTBY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_CASE"/>
+    <filter>&quot;ISDEL&quot;='0'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="CaseSubType">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CSBID"/>
+      <viewAttribute id="ISDEL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_CBSTP"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Policy">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="POLID"/>
+      <viewAttribute id="ISDEL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_POLCY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="Case" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="POLID"/>
+      <viewAttribute hidden="true" id="JOIN$CSEID$CSEID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Case">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSEID" source="CSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSENO" source="CSENO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ISDEL" source="ISDEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CSEID$CSEID" source="CSEID"/>
+    </input>
+    <input node="Policy">
+      <mapping xsi:type="Calculation:AttributeMapping" target="POLID" source="POLID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CSEID$CSEID" source="CSEID"/>
+    </input>
+    <joinAttribute name="JOIN$CSEID$CSEID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="Case" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="POLID"/>
+      <viewAttribute id="CSBID"/>
+      <viewAttribute hidden="true" id="JOIN$CSEID$CSEID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSEID" source="CSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSENO" source="CSENO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ISDEL" source="ISDEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POLID" source="POLID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CSEID$CSEID" source="CSEID"/>
+    </input>
+    <input node="CaseSubType">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSBID" source="CSBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CSEID$CSEID" source="CSEID"/>
+    </input>
+    <joinAttribute name="JOIN$CSEID$CSEID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="POLID"/>
+      <viewAttribute id="CSBID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1_2"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Aggregation_1">
+  <attributes>
+    <attribute id="CSEID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSEID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CSEID"/>
+    </attribute>
+    <attribute id="CSENO" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSENO"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CSENO"/>
+    </attribute>
+    <attribute id="ISDEL" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ISDEL"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="ISDEL"/>
+    </attribute>
+    <attribute id="POLID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="POLID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="POLID"/>
+    </attribute>
+    <attribute id="CSBID" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSBID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CSBID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="361" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Case" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="391"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="CaseSubType" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="512" y="391"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Policy" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="391"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-73" y="95"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="236"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="CaseSubType" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="142"/>
+    </shape>
+    <shape modelObjectName="Case" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="125"/>
+    </shape>
+    <shape modelObjectName="Policy" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="-228" y="30"/>
+      <rectangleSize width="119"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

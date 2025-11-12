@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CPM_EMP_EMPLOYEEDETAILS" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CPM_EMP_EMPLOYEEDETAILS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="M_EMPLY">
+    <resourceUri>M_EMPLY</resourceUri>
+  </DataSource>
+  <DataSource id="CPM_T_CASE">
+    <resourceUri>CPM_T_CASE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Employee">
+    <viewAttributes>
+      <viewAttribute id="EMPID"/>
+      <viewAttribute id="EMPNM"/>
+      <viewAttribute id="EMPPN"/>
+      <viewAttribute id="ISDEL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="M_EMPLY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Case">
+    <viewAttributes>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CMPID"/>
+      <viewAttribute id="CMPNM"/>
+      <viewAttribute id="CMPPN"/>
+      <viewAttribute id="ISDEL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_CASE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="EMPID"/>
+      <viewAttribute id="EMPNM"/>
+      <viewAttribute id="EMPPN"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CMPID"/>
+      <viewAttribute id="CMPPN"/>
+      <viewAttribute hidden="true" id="JOIN$EMPID$CMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Employee">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPNM" source="EMPNM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPPN" source="EMPPN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ISDEL" source="ISDEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$CMPID" source="EMPID"/>
+    </input>
+    <input node="Case">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSENO" source="CSENO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CSEID" source="CSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPID" source="CMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPPN" source="CMPPN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$CMPID" source="CMPID"/>
+    </input>
+    <joinAttribute name="JOIN$EMPID$CMPID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="EMPID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPID"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPID"/>
+    </attribute>
+    <attribute id="EMPNM" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPNM"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPNM"/>
+    </attribute>
+    <attribute id="EMPPN" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPPN"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPPN"/>
+    </attribute>
+    <attribute id="ISDEL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ISDEL"/>
+      <keyMapping columnObjectName="Join_1" columnName="ISDEL"/>
+    </attribute>
+    <attribute id="CSENO" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSENO"/>
+      <keyMapping columnObjectName="Join_1" columnName="CSENO"/>
+    </attribute>
+    <attribute id="CSEID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSEID"/>
+      <keyMapping columnObjectName="Join_1" columnName="CSEID"/>
+    </attribute>
+    <attribute id="CMPID" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CMPID"/>
+      <keyMapping columnObjectName="Join_1" columnName="CMPID"/>
+    </attribute>
+    <attribute id="CMPPN" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CMPPN"/>
+      <keyMapping columnObjectName="Join_1" columnName="CMPPN"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Employee" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Case" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Employee" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="146"/>
+    </shape>
+    <shape modelObjectName="Case" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="147"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CPM_EMP_WITNESSDETAIL" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CPM_EMP_RESPONDENTDETAIL"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CPM_T_WITNS">
+    <resourceUri>CPM_T_WITNS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Witness">
+    <viewAttributes>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="WITID"/>
+      <viewAttribute id="WITNM"/>
+      <viewAttribute id="ISDEL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_WITNS"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Witness">
+  <attributes>
+    <attribute id="CSEID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSEID"/>
+      <keyMapping columnObjectName="Witness" columnName="CSEID"/>
+    </attribute>
+    <attribute id="WITID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WITID"/>
+      <keyMapping columnObjectName="Witness" columnName="WITID"/>
+    </attribute>
+    <attribute id="WITNM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WITNM"/>
+      <keyMapping columnObjectName="Witness" columnName="WITNM"/>
+    </attribute>
+    <attribute id="ISDEL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ISDEL"/>
+      <keyMapping columnObjectName="Witness" columnName="ISDEL"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Witness" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="117" y="213"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

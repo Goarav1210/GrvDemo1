@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CPM_EMP_CASEDETAILSLANDINGPAGE" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CPM_EMP_CaseDetails"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CPM_T_CASE">
+    <resourceUri>CPM_T_CASE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Case">
+    <viewAttributes>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="ISDEL"/>
+      <viewAttribute id="CMPNM"/>
+      <viewAttribute id="CMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_CASE"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Case">
+  <attributes>
+    <attribute id="CSENO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Case Number"/>
+      <keyMapping columnObjectName="Case" columnName="CSENO"/>
+    </attribute>
+    <attribute id="CSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSEID"/>
+      <keyMapping columnObjectName="Case" columnName="CSEID"/>
+    </attribute>
+    <attribute id="ISDEL" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Is Deleted"/>
+      <keyMapping columnObjectName="Case" columnName="ISDEL"/>
+    </attribute>
+    <attribute id="CMPNM" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Complainant Name"/>
+      <keyMapping columnObjectName="Case" columnName="CMPNM"/>
+    </attribute>
+    <attribute id="CMPID" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Complainant Employee Id (Foreign Key CPM_M_EMPLY Table)"/>
+      <keyMapping columnObjectName="Case" columnName="CMPID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="994.5158740968916" y="186.9999988079071"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Case" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="1005" y="340"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

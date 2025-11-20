@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CPM_EMP_REVIEWER" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS">
+<descriptions defaultDescription="CPM_EMP_REVIEWER"/>
+<localVariables>
+  <variable id="IPCSEID" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="INTEGER" mandatory="true">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CPM_T_CASE">
+    <resourceUri>CPM_T_CASE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="CSENO"/>
+      <viewAttribute id="CSEID"/>
+      <viewAttribute id="CMPID"/>
+      <viewAttribute id="CMPNM"/>
+      <viewAttribute id="CMPPN"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="CPM_T_CASE"/>
+    <filter>&quot;CSEID&quot;=$$IPCSEID$$</filter>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="CSENO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Case Number"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CSENO"/>
+    </attribute>
+    <attribute id="CSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CSEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CSEID"/>
+    </attribute>
+    <attribute id="CMPID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Complainant Employee Id (Foreign Key CPM_M_EMPLY Table)"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CMPID"/>
+    </attribute>
+    <attribute id="CMPNM" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Complainant Name"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CMPNM"/>
+    </attribute>
+    <attribute id="CMPPN" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Complainant Personnel Number"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CMPPN"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="106" y="198"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

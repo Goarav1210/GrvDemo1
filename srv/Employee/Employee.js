@@ -8,6 +8,8 @@ module.exports = cds.service.impl(function () {
     this.on("RybXHYhRMAVoQfdA", async (req) => {
         let tx;
         try {
+
+           
             let result,case_id;
             let payload = req.data;
             console.log('Incoming Payload:', payload);
@@ -15,26 +17,44 @@ module.exports = cds.service.impl(function () {
             oInput = JSON.parse(payload.FXPUWMCJEKALGSTV);
             let oCase = oInput.Case;
             console.log('Extracted Union Object:', oCase);
- 
+   
             tx = cds.tx(req);
-            for (let i = 0; i < oCase.length; i++) {
+          
  
                 result = await tx.run(`CALL prCreateUpdateCase(?,?,?,?,?,?,?,?)`, [
-                    setValue(oCase[i].CSEID),
-                    setValue(oCase[i].CSENO),
-                    setValue(oCase[i].CMPID),
-                    setValue(oCase[i].CMPNM),
-                    setValue(oCase[i].CMPPN),
-                    setValue(oCase[i].ISDRAFT),
-                    setValue(oCase[i].ISDEL)
+                    setValue(oCase.CSEID),
+                    setValue(oCase.CSENO),
+                    setValue(oCase.CMPID),
+                    setValue(oCase.CMPNM),
+                    setValue(oCase.CMPPN),
+                    setValue(oCase.ISDRAFT),
+                    setValue(oCase.ISDEL)
                 ]);
                 case_id = result.OCSEID;
+               for (let i = 0; i < oCase.Respondent.length; i++) {
+                result = await tx.run(`CALL prCreateRespondent(?,?,?,?,?)`, [
+                    setValue(case_id),
+                    setValue(oCase.Respondent[i].RSNID),
+                    setValue(oCase.Respondent[i].RESED),
+                    setValue(oCase.Respondent[i].RESNM),
+                    setValue(oCase.Respondent[i].ISDEL)
+                ]);
+                 }
 
- 
+             for (let i = 0; i < oCase.Witness.length; i++) {
+                result = await tx.run(`CALL prCreateWitness(?,?,?,?,?)`, [
+                    setValue(case_id),
+                    setValue(oCase.Witness[i].PKWID),
+                    setValue(oCase.Witness[i].WITID),
+                    setValue(oCase.Witness[i].WITNM),
+                    setValue(oCase.Witness[i].ISDEL)
+                ]);
+                 }
+
                 console.log('Stored Procedure Result:', result);
  
                 await tx.commit();
-            }
+           
             returnObj = {
                 Success: "Success"
             }
@@ -52,9 +72,6 @@ module.exports = cds.service.impl(function () {
             });
         }
     });
- 
- 
- 
  
 })
  
